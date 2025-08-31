@@ -2,7 +2,7 @@
 // It should NOT contain any 'require()' statements.
 
 // --- Configuration ---
-const BACKEND_URL = ''; 
+const BACKEND_URL = 'https://shopping-assistant-backend.onrender.com';
 
 // --- DOM Elements ---
 const voiceButton = document.getElementById('voice-button');
