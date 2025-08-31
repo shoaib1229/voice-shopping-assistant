@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Voice Command Shopping Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .pulse { animation: pulse-animation 1.5s infinite; }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.7); }
+            100% { box-shadow: 0 0 0 20px rgba(96, 165, 250, 0); }
+        }
+        #recipe-modal-content, #search-modal-content { animation: slide-up 0.3s ease-out; }
+        @keyframes slide-up {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-2xl">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 dark:text-white">Shopping Assistant ✨</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300">Your AI-powered shopping companion.</p>
+        </header>
+
+        <main>
+            <div class="flex justify-center mb-8">
+                <button id="voice-button" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-24 h-24 flex items-center justify-center text-4xl transition-transform transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
+                    <i id="mic-icon" class="fas fa-microphone"></i>
+                </button>
+            </div>
+            
+            <p id="status" class="text-center text-gray-500 dark:text-gray-400 h-6 mb-4"></p>
+
+            <div id="shopping-list-container" class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
+                <div class="flex justify-between items-center mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">
+                    <h2 class="text-2xl font-semibold">My Shopping List</h2>
+                    <button id="recipe-button" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        ✨ Get Recipe Ideas
+                    </button>
+                </div>
+                <ul id="shopping-list" class="space-y-3">
+                    <li class="flex justify-center items-center text-gray-500 dark:text-gray-400" id="empty-list-message">
+                        Your list is empty. Tap the mic to add items.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                <div class="flex justify-between items-center mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">
+                    <h2 class="text-2xl font-semibold">Smart Suggestions</h2>
+                      <button id="suggest-button" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        ✨ Suggest More
+                    </button>
+                </div>
+                 <div id="suggestions" class="flex flex-wrap gap-2">
+                    <button class="suggestion-btn bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 py-1 px-3 rounded-full text-sm hover:bg-green-200 dark:hover:bg-green-800 transition-colors">Milk</button>
+                    <button class="suggestion-btn bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 py-1 px-3 rounded-full text-sm hover:bg-green-200 dark:hover:bg-green-800 transition-colors">Bread</button>
+                    <button class="suggestion-btn bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 py-1 px-3 rounded-full text-sm hover:bg-green-200 dark:hover:bg-green-800 transition-colors">Eggs</button>
+                 </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="recipe-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden">
+        <div id="recipe-modal-content" class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+             <div class="flex justify-between items-center mb-4 border-b pb-2 dark:border-gray-600">
+                <h3 id="recipe-name" class="text-2xl font-bold">Recipe Idea</h3>
+                <button id="close-recipe-modal-btn" class="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 text-2xl">&times;</button>
+            </div>
+            <div id="recipe-details"></div>
+        </div>
+    </div>
+    <div id="search-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden">
+        <div id="search-modal-content" class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+             <div class="flex justify-between items-center mb-4 border-b pb-2 dark:border-gray-600">
+                <h3 class="text-2xl font-bold">Search Results</h3>
+                <button id="close-search-modal-btn" class="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 text-2xl">&times;</button>
+            </div>
+            <div id="search-results"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
